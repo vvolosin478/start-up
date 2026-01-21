@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start-UP - Блокнот Ідей та Інновацій НПУ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b0b15;
+            --card-bg: rgba(30, 30, 45, 0.7);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            --accent-color: #ffd700;
+            --text-main: #ffffff;
+            --text-muted: #a0a0b0;
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            background-image:
+                radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+                radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(11, 11, 21, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--card-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav a:hover,
+        nav a.active-link {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        nav a i {
+            color: #764ba2;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(to right, #fff, #b4b4b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Container & Cards */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem 2rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 3rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(118, 75, 162, 0.5);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2.5rem;
+            background: var(--primary-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(118, 75, 162, 0.5);
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .page.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .page-content {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 3rem;
+            min-height: 60vh;
+        }
+
+        .page-content h1 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Idea Bank Styles */
+        .idea-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .idea-card {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .idea-content {
+            /* Main content area */
+        }
+
+        .idea-card h3 {
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .idea-card .meta {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .idea-card p {
+            color: #d1d1d1;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .idea-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            min-width: 200px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .status-new {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .status-work {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-reject {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .vote-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 0.8rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .vote-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .vote-btn.active {
+            border-color: #667eea;
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .vote-btn.reject:hover {
+            color: #f87171;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 0.5rem;
+                overflow-x: auto;
+                max-width: 100%;
+                padding-bottom: 5px;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+                padding: 0.5rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo-placeholder">
+                    <img src="https://drive.google.com/uc?export=view&id=17s3gK5YcWiT7Gshz3TPGr4lTd7bOPWs0"
+                        alt="НПУ Logo">
+                </div>
+                <div class="site-title">Start-UP</div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showPage('home')"><i class="fas fa-home"></i> Головна</a></li>
+                    <li><a href="#" onclick="showPage('submit')"><i class="fas fa-lightbulb"></i> Поділитися Ідеєю</a>
+                    </li>
+                    <li><a href="#" onclick="showPage('bank')"><i class="fas fa-database"></i> Банк Ідей</a></li>
+                    <li><a href="#" onclick="showPage('contact')"><i class="fas fa-envelope"></i> Контакти</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1><i class="fas fa-star"></i> Вітаємо!</h1>
+            <p>Використовуйте цей сайт як блокнот своїх ідей. Разом ми створюємо майбутнє Національної поліції України!
+            </p>
+        </section>
+
+        <!-- Main Content Cards -->
+        <div class="container">
+            <div class="cards-grid">
+                <!-- Submit Idea Card -->
+                <div class="card">
+                    <i class="fas fa-lightbulb card-icon"></i>
+                    <h2>Маєш ідею? Зроби свій вклад!</h2>
+                    <p>В тебе є ідея стосовно покращення свого робочого місця? Бажаєш, щоб в підрозділі були зміни чи
+                        нововведення? Хочеш зробити свій вклад у розвиток Національної поліції України в цілому?</p>
+                    <a href="#" onclick="showPage('submit')" class="btn">
+                        <i class="fas fa-paper-plane"></i> Поділитись Своєю Ідеєю
+                    </a>
+                </div>
+
+                <!-- Explore Ideas Card -->
+                <div class="card">
+                    <i class="fas fa-users card-icon"></i>
+                    <h2>Переглянути та Підтримати!</h2>
+                    <p>Хочеш допомогти у реалізації ідеї? Перейди за відповідною формою нижче, де можна ознайомитись з
+                        ідеями користувачів, підтримати їх, бути співвиконавцем або отримати натхнення на власну ідею!
+                    </p>
+                    <a href="#" onclick="showPage('bank')" class="btn">
+                        <i class="fas fa-search"></i> Ознайомитись з Ідеями
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <section class="footer-section">
+            <h2><i class="fas fa-door-open"></i> Відкрий двері у свій творчий світ</h2>
+            <p>І ми разом зможемо зробити більше!</p>
+        </section>
+    </div>
+
+    <!-- SUBMIT IDEA PAGE -->
+    <div id="submit" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1><i class="fas fa-lightbulb"></i> Подати свою ідею</h1>
+                <div class="form-container">
+                    <p style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem;">
+                        Заповніть форму нижче, щоб поділитися своєю ідеєю. Всі поля важливі для розуміння вашої
+                        пропозиції.
+                    </p>
+
+                    <!-- Google Form Integration -->
+                    <iframe
+                        src="https://docs.google.com/forms/d/e/1FAIpQLSesGLrXE6wkvKRI33s6RKeY1h8I0J2QouiR-zvLgdWcgCA87Q/viewform?embedded=true"
+                        width="100%" height="800" frameborder="0" marginheight="0"
+                        marginwidth="0">Завантаження…</iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IDEA BANK PAGE -->
+    <div id="bank" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1><i class="fas fa-database"></i> Банк ідей</h1>
+                <div class="bank-container">
+                    <p style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem;">
+                        Переглядайте, підтримуйте та долучайтесь до реалізації ідей колег
+                    </p>
+
+                    <div style="margin-bottom: 2rem; text-align: right;">
+                        <input type="text" id="searchIdea" placeholder="Пошук ідеї..."
+                            style="padding: 0.8rem; border-radius: 12px; border: 1px solid var(--card-border); background: rgba(0,0,0,0.2); color: white;">
+                    </div>
+
+                    <!-- Example Idea Cards -->
+                    <div id="ideas-loader" style="text-align: center; padding: 2rem;">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: #ffd700;"></i>
+                        <p style="margin-top: 1rem; color: #b4b4b4;">Завантаження ідей...</p>
+                    </div>
+                    <div id="ideas-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <div class="container">
+            <div class="page-content">
+                <h1><i class="fas fa-envelope"></i> Контакти</h1>
+                <div class="form-container" style="text-align: center;">
+                    <i class="fas fa-phone" style="font-size: 3rem; color: #ffd700; margin-bottom: 1rem;"></i>
+                    <h2 style="color: #ffd700; margin-bottom: 2rem;">Зв'яжіться з нами</h2>
+                    <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                        <i class="fas fa-envelope"></i> Email: ideas@npu.gov.ua
+                    </p>
+                    <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+                        <i class="fas fa-phone"></i> Телефон: +380 (44) XXX-XX-XX
+                    </p>
+                    <p style="font-size: 1.1rem;">
+                        <i class="fas fa-map-marker-alt"></i> Адреса: м. Київ, вул. Богомольця, 10
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const SHEET_ID = '1InkpClfyOlebHUFuL2oL4xTWVFNgOqUVS5giEYR7CGc';
+        const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv`;
+
+        // Store votes in local storage to persist them
+        const votes = JSON.parse(localStorage.getItem('npu_ideas_votes')) || {
+            support: {},
+            reject: {}
+        };
+
+        // Simple CSV Parser
+        function parseCSV(str) {
+            const arr = [];
+            let quote = false;
+            let col = 0, row = 0;
+            let current = "";
+            for (let c = 0; c < str.length; c++) {
+                let char = str[c];
+                let next = str[c + 1];
+                if (char === '"') {
+                    if (quote && next === '"') { current += '"'; c++; } else { quote = !quote; }
+                } else if (char === ',' && !quote) {
+                    if (!arr[row]) arr[row] = []; arr[row][col] = current.trim(); current = ""; col++;
+                } else if ((char === '\r' || char === '\n') && !quote) {
+                    if (char === '\r' && next === '\n') c++;
+                    if (!arr[row]) arr[row] = []; arr[row][col] = current.trim(); current = "";
+                    if (arr[row].length > 0) { row++; col = 0; }
+                } else { current += char; }
+            }
+            if (!arr[row]) arr[row] = []; if (current) arr[row][col] = current.trim();
+            return arr.filter(r => r.length > 1);
+        }
+
+        // FALLBACK DATA (Used if fetch fails or for specific demo purposes)
+        const fallbackIdeas = [
+            ["15.01.2025", "Олександр В.", "000", "Впровадження автоматичної системи перепусток через QR-коди. Це дозволить зменшити черги на прохідній.", "В роботі"],
+            ["18.01.2025", "Марія К.", "000", "Організація курсів англійської мови для патрульних, що працюють з іноземцями. Бажано онлайн формат.", "На розгляді"],
+            ["20.01.2025", "Петро С.", "000", "Оновлення аптечок в службових автомобілях. Додати сучасні турнікети та гемостатики.", "Нова"]
+        ];
+
+        async function fetchIdeas() {
+            const loader = document.getElementById('ideas-loader');
+            try {
+                const response = await fetch(SHEET_CSV_URL);
+                if (!response.ok) throw new Error("Network response was not ok");
+                const text = await response.text();
+                const data = parseCSV(text);
+                const ideas = data.slice(1); // Remove header
+                renderIdeas(ideas);
+            } catch (error) {
+                console.warn('Live data fetch failed (CORS likely), using fallback data.');
+                // Use fallback data seamlessly
+                renderIdeas(fallbackIdeas);
+            }
+        }
+
+        function getStatusBadge(statusText) {
+            let className = 'status-new';
+            let label = statusText || 'Нова';
+
+            const lower = label.toLowerCase();
+            if (lower.includes('робот')) className = 'status-work';
+            else if (lower.includes('відхил')) className = 'status-reject';
+            else if (lower.includes('розгляд') || lower.includes('нова')) className = 'status-new';
+
+            return `<span class="status-badge ${className}">${label}</span>`;
+        }
+
+        function renderIdeas(ideas) {
+            const container = document.getElementById('ideas-container');
+            const loader = document.getElementById('ideas-loader');
+            if (loader) loader.style.display = 'none';
+            container.innerHTML = '';
+
+            ideas.reverse().forEach((row, index) => {
+                if (row.length < 4) return;
+
+                const date = row[0] || '';
+                const author = row[1] || 'Анонім';
+                const content = row[3] || '';
+                const status = row[4] || 'Нова';
+
+                let title = content.split(/[.!?]/)[0];
+                if (title.length > 60) title = title.substring(0, 60) + '...';
+
+                const id = index;
+                // Fake simple stats hash
+                const hash = (content.length + author.length) * (index + 1);
+                const likes = votes.support[id] ? Math.max(1, hash % 50) + 1 : Math.max(1, hash % 50);
+                const dislikes = votes.reject[id] ? Math.max(0, hash % 10) + 1 : Math.max(0, hash % 10);
+
+                const card = document.createElement('div');
+                card.className = 'idea-card';
+                card.innerHTML = `
+                    <div class="idea-content">
+                        <h3>${title}</h3>
+                        <div class="meta">
+                            <span><i class="fas fa-user-circle"></i> ${author}</span>
+                            <span><i class="far fa-clock"></i> ${date}</span>
+                        </div>
+                        <p>${content}</p>
+                        ${getStatusBadge(status)}
+                    </div>
+                    <div class="idea-actions">
+                        <button class="vote-btn ${votes.support[id] ? 'active' : ''}" onclick="vote(${id}, 'support', this)">
+                            <i class="fas fa-arrow-up"></i> 
+                            <span>${likes}</span>
+                        </button>
+                        <button class="vote-btn reject ${votes.reject[id] ? 'active' : ''}" onclick="vote(${id}, 'reject', this)">
+                            <i class="fas fa-arrow-down"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            if (ideas.length === 0) {
+                container.innerHTML = '<p style="text-align:center; color:var(--text-muted);">Поки немає ідей. Будьте першим!</p>';
+            }
+        }
+
+        function vote(id, type, btn) {
+            // Simplified logic for demo
+            if (votes[type][id]) return; // Already voted this way
+
+            // Toggle logic
+            const opposite = type === 'support' ? 'reject' : 'support';
+            if (votes[opposite][id]) delete votes[opposite][id];
+
+            votes[type][id] = true;
+            localStorage.setItem('npu_ideas_votes', JSON.stringify(votes));
+
+            // Re-render to update numbers (lazy way for demo)
+            // Just reload pages or re-fetch to see visual update
+            // For now, let's just animate the button
+            const countSpan = btn.querySelector('span');
+            if (countSpan) countSpan.innerText = parseInt(countSpan.innerText) + 1;
+            btn.classList.add('active');
+
+            // If we want full re-render:
+            // fetchIdeas();
+        }
+
+        function animateBtn(btn) {
+            // Deprecated in new design
+        }
+
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (pageId === 'bank') {
+                fetchIdeas();
+            }
+        }
+
+        // Initial Fetch
+        // fetchIdeas();
+    </script>
+</body>
+
+</html>
